@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Slot</title>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.slot-machine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.slot {
+  display: flex;
+  justify-content: center;
+  background-color: gray;
+  border-radius: 1rem;
+  padding: 0.25rem;
+}
+
+.slot>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background-color: black;
+  margin: 0.25rem;
+}
+
+.symbol, #spin {
+  font-size: 1.5rem;
+}
+
+#spin {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    margin: 0.25rem;
+}
+.yellow {
+  background-color: white;
+}
+
+p {
+  text-align: center;
+}
+
+#win {
+  display: none;
+  padding: 0.25rem 1rem;
+  border-radius: 1rem;
+  color: white;
+  background: red;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Web Slot</h1>
+    <div class="slot-machine">
+      <div class="slot">
+        <div>
+          <div class="symbol"></div>
+        </div>
+        <div>
+          <div class="symbol"></div>
+        </div>
+        <div>
+          <div class="symbol"></div>
+        </div>
+        <div>
+          <div class="symbol"></div>
+        </div>
+      </div>
+      <button id="spin" title="spin">📍</button>
+    </div>
+    <article>
+      <p>Terdapat 4 kolom, dan 4 emot, frekuensi harapan kemenangan adalah 4⁴ = 256 kali.</p>
+      <p>Masih mau main ginian? mikir goblok!!!</p>
+    </article>
+    <div id="win">
+      <p>Gila! berapa kali spin bro? dah dibilang goblok masih aja main</p>
+    </div>
+  </div>
+  <script>
+const symbols = ["🚀", "⚡", "👾", "🥶"];
+
+function spin() {
+  document.getElementById('spin').classList.toggle('yellow');
+  const symbolElements = document.getElementsByClassName("symbol");
+  let randomIndex = [];
+  for (let i = 0; i < symbolElements.length; i++) {
+    randomIndex[i] = Math.floor(Math.random() * symbols.length);
+    symbolElements[i].innerHTML = symbols[randomIndex[i]];
+  }
+  if(randomIndex.every((nilai, index, arr) => nilai === arr[0])) {
+    document.getElementById('win').style.display = 'block';
+    document.getElementById('spin').disabled = 'true';
+  }
+}
+
+document.getElementById("spin").addEventListener("click", spin);
+  </script>
+</body>
+</html>
